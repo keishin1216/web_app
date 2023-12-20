@@ -52,4 +52,4 @@ EXPOSE 443
 
 # Apacheを起動
 #CMD ["apache2ctl", "-D", "FOREGROUND"]
-CMD ["gunicorn", "-b", "0.0.0.0:443", "--keyfile", "/etc/apache2/ssl/server.key", "--certfile", "/etc/apache2/ssl/server.crt", "a:app"]
+CMD ["gunicorn", "-b", "0.0.0.0:443", "--keyfile", "/etc/apache2/ssl/server.key", "--certfile", "/etc/apache2/ssl/server.crt", "ap:app"]
