@@ -74,7 +74,7 @@ def login():
           if not existing_post:
            t = 0
            first = Post(user_id = user_id, t=t)
-           first.create_at = datetime.now('Asia/Tokyo')
+           first.create_at = datetime.now(pytz.timezone('Asia/Tokyo'))
            db.session.add(first)
            db.session.commit()
           
