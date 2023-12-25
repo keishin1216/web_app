@@ -2,6 +2,8 @@ from flask import Flask
 from flask import render_template, request, redirect, session
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin, LoginManager, login_user, logout_user, login_required
+from flask_session import Session
+from flask_session import create_scoped_session
 from datetime import time, datetime
 import pytz
 import os
@@ -12,6 +14,14 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///tour.db'
 app.config['SECRET_KEY'] = os.urandom(24)
 db = SQLAlchemy(app)
+app.config['SESSION_TYPE'] = 'sqlalchemy' 
+app.config['SESSION_PERMANENT'] = False
+app.config['SESSION_USE_SIGNER'] = True
+app.config['SESSION_KEY_PREFIX'] = 'your_prefix'
+app.config['SESSION_SQLALCHEMY'] = db  
+Session(app)
+db_session = create_scoped_session(app.app_context(), db)
+app.config['SESSION_SQLALCHEMY_DB'] = db_session
 
 
 
