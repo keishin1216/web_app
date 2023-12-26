@@ -18,7 +18,7 @@ function successCallback(position) {
        // "longitude": longitude
     //};
    
-    fetch("/register/save_location", {
+    fetch("/register/login/count/check", {
         method: "POST",
         mode: "cors", 
         //headers: {
