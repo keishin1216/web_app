@@ -42,8 +42,6 @@ class User(UserMixin, db.Model):
     user_name = db.Column(db.String(), nullable=False, unique=True)
     password = db.Column(db.String(), nullable=False)
     posts = db.relationship('Post', back_populates='user', lazy='dynamic')
-    sessions = db.relationship('UserSession', back_populates='user', lazy='dynamic')
-
 
 
 @login_manager.user_loader
