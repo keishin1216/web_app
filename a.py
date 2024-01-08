@@ -13,6 +13,7 @@ class User(db.Model):
     id = db.Column(db.Integer,primary_key=True)
     user_name = db.Column(db.String(), nullable=False, unique=True)
     password = db.Column(db.String(), nullable=False)
+    
 
 class Location(db.Model):
       create_at = db.Column(db.DateTime, nullable=False, default=datetime.now(pytz.timezone('Asia/Tokyo')))

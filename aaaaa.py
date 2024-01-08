@@ -1,29 +1,22 @@
-import math
+def add(index, value):
+    x[index - 1] += value
 
+def subtraction(index, value):
+    x[index - 1] -= value
+
+x = [10, 0, 0, 0, 0]
 while True:
-    money = int(input("元金を入力してください: "))
-    rate = float(input("利率を入力してください (例: 5 は 5%): ")) / 100
-    long = int(input("期間を入力してください: "))
-    if long > 0:
+    print("x = [ ", end="")
+    for i in range(len(x)):
+        print("{} ".format(x[i]), end="")
+    print("]")
+
+    f = int(input("from (終了は99と入力):"))
+    if f==99:
+        print("処理を終了します. ")
         break
-
-def calculate_simple_interest(principal, interest_rate, years):
-    return principal * (1 + interest_rate * years)
-
-def calculate_compound_interest(principal, interest_rate, years):
-    return principal * (1 + interest_rate)**years
-
-def main():
-    simple_balance = calculate_simple_interest(money, rate, long)
-    compound_balance = calculate_compound_interest(money, rate, long)
-
-    print(f"{long}年後の単利の残高: {math.floor(simple_balance)}")
-    print(f"{long}年後の複利の残高: {math.floor(compound_balance)}")
-
-    if compound_balance > simple_balance:
-        print(f"{long}年目で複利が単利を超えました。")
     else:
-        print(f"{long}年目でも複利は単利を超えませんでした。")
-
-if __name__ == "__main__":
-    main()
+        t = int(input("to:"))
+        v = int(input("value:"))
+        add(t, v)
+        subtraction(f, v)
