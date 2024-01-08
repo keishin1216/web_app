@@ -85,7 +85,6 @@ def login():
            db.session.commit()
           
           session['user_id'] = user.id
-          session['session_id'] = session_id 
           login_user(user)
           return redirect('/register/login/count')
     else:
