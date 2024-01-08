@@ -44,13 +44,7 @@ class User(UserMixin, db.Model):
     posts = db.relationship('Post', back_populates='user', lazy='dynamic')
     sessions = db.relationship('UserSession', back_populates='user', lazy='dynamic')
 
-class UserSession(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    user = db.relationship('User', back_populates='sessions')
-    session_id = db.Column(db.String(), unique=True, nullable=False)
-    last_login = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-    posts = db.relationship('Post', back_populates='session', lazy='dynamic')
+
 
 @login_manager.user_loader
 def load_user(user_id):
