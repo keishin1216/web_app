@@ -8,7 +8,7 @@ from ap import app, User, Post  # ap.py内のFlaskアプリケーションおよ
 # Flaskアプリケーションのコンテキストを手動で作成
 with app.app_context():
     # ユーザー 'renshu' の情報を取得
-    user = User.query.filter_by(user_name='kkkk').first()
+    user = User.query.filter_by(user_name='k1').first()
 
     if user:
         # ユーザーに関連する投稿データを取得
