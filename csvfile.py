@@ -8,7 +8,7 @@ from ap import app, User, Post  # ap.py内のFlaskアプリケーションおよ
 # Flaskアプリケーションのコンテキストを手動で作成
 with app.app_context():
     # ユーザー 'renshu' の情報を取得
-    user = User.query.filter_by(user_name='renshu').first()
+    user = User.query.filter_by(user_name='kkkk').first()
 
     if user:
         # ユーザーに関連する投稿データを取得
@@ -28,7 +28,7 @@ with app.app_context():
         df = pd.DataFrame(data)
 
         
-        df.to_csv('output_renshu.csv', index=False)
+        df.to_csv('output_kkk.csv', index=False)
         print("CSV")
     else:
-        print("User 'renshu' not found.")
+        print("User 'db' not found.")
