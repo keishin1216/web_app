@@ -1,9 +1,9 @@
-
 from flask import Flask
 from flask import render_template, request, redirect, session
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin, LoginManager, login_user, logout_user, login_required
 from datetime import time, datetime
+import pandas as pd
 import pytz
 import os
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -158,10 +158,28 @@ def finish():
      if request.method == 'GET':
       user = User.query.order_by(User.id.desc()).first()
       post = Post.query.order_by(Post.id.desc()).first()
+      user_posts = Post.query.filter_by(user_id=user.id).all()
       user_name = user.user_name
       impression_counts = post.impression_counts
+      users = User.query.all()
+
+      data = {
+            'id': [post.id for post in user_posts],
+            'user_id': [post.user_id for post in user_posts],
+            'create_at': [post.create_at for post in user_posts],
+            't': [post.t for post in user_posts],
+            'impression': [post.impression for post in user_posts],
+            'impression_counts': [post.impression_counts for post in user_posts],
+            'lat': [post.lat for post in user_posts],
+            'lon': [post.lon for post in user_posts]
+        }
+      df = pd.DataFrame(data)
+
+        
+      df.to_csv('output22.csv', index=False)
+      print("CSV")
       db.session.commit()
-      return render_template('finish.html', user_name=user_name,impression_counts=impression_counts)
+      return render_template('finish.html', user_name=user_name,impression_counts=impression_counts, users=users)
 
 
 if __name__ == '__main__':

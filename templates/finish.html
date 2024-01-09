@@ -13,6 +13,9 @@
         <td>{{ count }}</td>
     </tr>
     {% endfor %}
+    {% for u in users %}
+     <p>{{ u.user_name }}</p>
+    {% endfor %}
 </table>
 
 <a href="/register/login" role="button">戻る</a>
