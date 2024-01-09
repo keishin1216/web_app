@@ -175,11 +175,12 @@ def finish():
         }
       df = pd.DataFrame(data)
 
-        
-      df.to_csv('output22.csv', index=False)
+      csv_filename = 'output22.csv' 
+      df.to_csv(csv_filename, index=False)
       print("CSV")
       db.session.commit()
-      return render_template('finish.html', user_name=user_name,impression_counts=impression_counts, users=users)
+      return send_file(csv_filename, as_attachment=True)
+      #return render_template('finish.html', user_name=user_name,impression_counts=impression_counts, users=users)
 
 
 if __name__ == '__main__':
