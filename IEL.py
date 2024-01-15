@@ -4,7 +4,7 @@ import math
 import pandas as pd
 
 # Read data from CSV file
-df = pd.read_csv('../plus_data.csv/岩崎.csv')  # Replace 'your_data_file.csv' with your actual file name
+df = pd.read_csv('../eda改/Book1.csv')  # Replace 'your_data_file.csv' with your actual file name
 a_values = df['buttonNumber'].values
 b_values = df['time(min)'].values
 

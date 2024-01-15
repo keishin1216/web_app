@@ -33,7 +33,10 @@ class Post(db.Model):
   t = db.Column(db.Float, nullable=False, default=0.0)
   impression = db.Column(db.Integer)
   #impression_data = db.Column(db.List)
-  impression_counts = db.Column(db.PickleType, default =  {i: 0 for i in range(1, 11)})
+  def default_impression_counts():
+        return {i: 0 for i in range(-5, 6) if i != 0}
+  impression_counts = db.Column(db.PickleType, default=default_impression_counts)
+
   lat = db.Column(db.Float)
   lon = db.Column(db.Float)
 
@@ -120,7 +123,7 @@ def count():
         current_time = (now- login_post.create_at.astimezone(pytz.timezone('Asia/Tokyo'))).seconds
         #latest_post.impression_data = impression_data.append(impression_value)
         if latest_post is None:
-           impression_counts = {i: 0 for i in range(1, 11)}
+           impression_counts = {i: 0 for i in range(-5, 6) if i != 0}
            impression_counts[impression_value] += 1
            post = Post(impression=impression_value, impression_counts=impression_counts, create_at=now, t = current_time, user_id=user_id)#, impression_data=latest_post.impression_data)       
         else:
@@ -165,14 +168,15 @@ def finish():
       users = User.query.all()
 
       data = {
-            'id': [post.id for post in user_posts],
-            'user_id': [post.user_id for post in user_posts],
-            'create_at': [post.create_at for post in user_posts],
-            't': [post.t for post in user_posts],
-            'impression': [post.impression for post in user_posts],
-            'impression_counts': [post.impression_counts for post in user_posts],
-            'lat': [post.lat for post in user_posts],
-            'lon': [post.lon for post in user_posts]
+            'username': [u.username for u in user],
+            'id': [p.id for p in user_posts],
+            'user_id': [p.user_id for p in user_posts],
+            'create_at': [p.create_at for p in user_posts],
+            't': [p.t for p in user_posts],
+            'impression': [p.impression for p in user_posts],
+            'impression_counts': [p.impression_counts for p in user_posts],
+            'lat': [p.lat for p in user_posts],
+            'lon': [p.lon for p in user_posts]
         }
       df = pd.DataFrame(data)
 

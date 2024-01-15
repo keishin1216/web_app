@@ -22,7 +22,7 @@ def convert_folder_to_csv(folder_path):
             print(f'Converted {json_file} to {csv_file}')
 
 
-folder_path = '/../data.json'
+folder_path = '卒論'
 
 
 convert_folder_to_csv(folder_path)
