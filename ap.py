@@ -168,7 +168,7 @@ def finish():
       users = User.query.all()
 
       data = {
-            'username': [u.username for u in user],
+            'username': user.username,
             'id': [p.id for p in user_posts],
             'user_id': [p.user_id for p in user_posts],
             'create_at': [p.create_at for p in user_posts],
