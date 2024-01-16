@@ -16,7 +16,14 @@ p {
     border-collapse: separate;
     margin-bottom: 5px;
 }
-.form-number{
+.form-number1{
+    margin: 5px 13px;
+    border: 2px solid purple;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.form-number2{
     margin: 5px 15px;
     border: 2px solid purple;
     border-radius: 8px;
