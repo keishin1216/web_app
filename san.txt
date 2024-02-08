@@ -1,1 +1,0 @@
-subjectAltName = DNS:www.tour.mydns.jp, IP:192.168.128.102

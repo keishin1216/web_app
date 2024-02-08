@@ -11,20 +11,11 @@ function successCallback(position) {
     var formData = new FormData();
     formData.append("latitude", latitude);
     formData.append("longitude", longitude);
-    //var latitude = position.coords.latitude;
-    //var longitude = position.coords.longitude;
-    //var data ={
-      //  "latitude": latitude,
-       // "longitude": longitude
-    //};
-   
+
     fetch("/register/login/count/check", {
         method: "POST",
         mode: "cors", 
-        //headers: {
-           // 'Content-Type': 'application/json'
-        //},
-        body: formData//JSON.stringify(data),
+        body: formData
     })
     .then(response => response.json())
     .then(data => {
@@ -35,9 +26,6 @@ function successCallback(position) {
         console.error("Error:", error);
     });
 
-   
-    //document.getElementById("latitude").innerHTML = latitude;
-    //document.getElementById("longitude").innerHTML = longitude;
 }
 
 function errorCallback() {

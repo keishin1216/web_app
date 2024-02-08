@@ -32,7 +32,6 @@ class Post(db.Model):
   create_at = db.Column(db.DateTime, nullable=False, default=datetime.now(pytz.timezone('Asia/Tokyo')))
   t = db.Column(db.Float, nullable=False, default=0.0)
   impression = db.Column(db.Integer)
-  #impression_data = db.Column(db.List)
   def default_impression_counts():
         return {i: 0 for i in range(-5, 6) if i != 0}
   impression_counts = db.Column(db.PickleType, default=default_impression_counts)
@@ -76,7 +75,6 @@ def login():
         user_name = request.form.get('user_name')
         password = request.form.get('password')
         user = User.query.filter_by(user_name=user_name).first()
-        #past_time = time.time()
         if check_password_hash(user.password, password):
           login_user(user)
           user_id = user.id
@@ -111,7 +109,7 @@ def count():
         if post.impression is None:
            return render_template('count.html', user_name=user_name, t = post.t, create_at=post.create_at)
         else:
-         return render_template('count.html', user_name=user_name, posts=posts)#, impression_data=post.impression_data)
+         return render_template('count.html', user_name=user_name, posts=posts)
     elif request.method == 'POST':
         impression_value = int(request.form.get('impression'))
         user_id = session.get('user_id')
@@ -121,14 +119,14 @@ def count():
         latest_post = Post.query.order_by(Post.id.desc()).first()
         now = datetime.now(pytz.timezone('Asia/Tokyo'))
         current_time = (now- login_post.create_at.astimezone(pytz.timezone('Asia/Tokyo'))).seconds
-        #latest_post.impression_data = impression_data.append(impression_value)
+
         if latest_post is None:
            impression_counts = {i: 0 for i in range(-5, 6) if i != 0}
            impression_counts[impression_value] += 1
-           post = Post(impression=impression_value, impression_counts=impression_counts, create_at=now, t = current_time, user_id=user_id)#, impression_data=latest_post.impression_data)       
+           post = Post(impression=impression_value, impression_counts=impression_counts, create_at=now, t = current_time, user_id=user_id)       
         else:
            latest_post.impression_counts[impression_value] += 1
-           post = Post(impression=impression_value, impression_counts=latest_post.impression_counts, create_at=now, t = current_time, user_id=user_id)#, impression_data=latest_post.impression_data) 
+           post = Post(impression=impression_value, impression_counts=latest_post.impression_counts, create_at=now, t = current_time, user_id=user_id)
         db.session.add(post)
         db.session.commit()
         return redirect('/register/login/count/check')
@@ -185,9 +183,7 @@ def finish():
       print("CSV")
       db.session.commit()
       return send_file(csv_filename, as_attachment=True)
-      #return render_template('finish.html', user_name=user_name,impression_counts=impression_counts, users=users)
-
 
 if __name__ == '__main__':
-    app.run(#host='0.0.0.0', ssl=('server.crt','server.key'),port=80, debug=True)
+    app.run(
     )
