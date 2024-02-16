@@ -1,0 +1,36 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+.header{
+    font-size: 20px;
+    text-align: left;
+    background-color: #007bff;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+}
+.header a{
+    color: white
+}
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+.logo{
+    margin-left: 20px;
+}
+.top-menu{
+    display: flex;
+}
+.menu-item{
+    margin-right: 20px;
+}
+.menu{
+    margin-left: auto;
+}

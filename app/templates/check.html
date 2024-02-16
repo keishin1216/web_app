@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+<link rel="stylesheet" href="../../../static/css/normalize.css">
+<link rel="stylesheet" href="../../../static/css/header.css">
+<link rel="stylesheet" href="../../../static/css/check.css">
+<header class="header">
+  <p class="logo"> 
+    <a href="/">TOP</a>
+  </p>
+  <nav class="menu">
+    <ul class="top-menu">
+      <li class="menu-item"><a href="/register/login">ログイン画面へ</a></li>
+    </ul>
+  </nav>
+</header>
+ <h1>フォーム送信確認</h1>
+ <h2>フォームを送信しました</h2>
+ <ul>
+  <li>感動量: {{impression}}</li>
+  <li>押下時間: {{ create_at.strftime('%H:%M:%S') }}</li>
+  <li>緯度：<span id="latitude">{{ lat }}</span><span>度</span></li>
+  <li>経度：<span id="longitude">{{ lon }}</span><span>度</span></li>
+ </ul>
+
+<script src="/static/js/location.js"></script>
+ <a href="/register/login/count" role="button">戻る</a>
+{% endblock %}

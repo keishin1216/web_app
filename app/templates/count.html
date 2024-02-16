@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% block content %}
+<link rel="stylesheet" href="../../static/css/normalize.css">
+<link rel="stylesheet" href="../../static/css/header.css">
+<link rel="stylesheet" href="../../static/css/count.css">
+<header class="header">
+  <p class="logo"> 
+    <a href="/">TOP</a>
+  </p>
+  <nav class="menu">
+    <ul class="top-menu">
+      <li class="menu-item"><a href="/register/login">ログイン画面へ</a></li>
+    </ul>
+  </nav>
+</header>
+<h1>{{user_name}}さん</h1>
+<h2>感動量</h2>
+<form method="POST">
+  <div class="form-container">
+    <div class="form-group"> 
+      <div class="form-column"> 
+        {% for i in range(-5, 0) %}
+          <input class="form-number1" type="radio" name="impression" value="{{ i }}">{{ i }}
+        {% endfor %}
+      </div>
+      <div class="form-column"> 
+        {% for i in range(1, 6) %}
+          <input class="form-number2" type="radio" name="impression" value="{{ i }}">{{ i }}
+        {% endfor %}
+      </div> 
+    </div>
+    <div class="form-column">
+      <button type="submit">送信</button>
+    </div>
+  </div>
+</form>
+<div class="start">
+  <table class="table-start">
+    <tr>
+      <th>スタート時間</th>
+      <th>感動量</th>
+      <th>時刻</th>
+      <th>緯度</th>
+      <th>経度</th>
+    </tr>
+    <tr>
+      <td>{{ create_at }}</td>
+      <td></td>
+      <td>{{ t }}</td>
+      <td>{{ lat }}</td>
+      <td>{{ lon }}</td>
+    </tr>
+    {% if posts %}
+      <tr>
+        <td>{{ posts[0].create_at.strftime('%H:%M:%S') }}</td>
+        <td>{{ posts[0].impression }}</td>
+        <td>{{ posts[0].t }}</td>
+        <td>{{ posts[0].lat }}</td>
+        <td>{{ posts[0].lon }}</td>
+      </tr>
+  </table>
+</div>
+<div class="now">
+  <table class="table-now">
+    <tr>
+      <th>ボタン押下時間</th>
+      <th>回数</th>
+    </tr>
+    {% for p in posts[1:] %}
+      <tr>
+        <td>{{ p.create_at.strftime('%H:%M:%S') }}</td>
+        <td>{{ loop.index }}回目</td>
+      </tr>
+    {% endfor %}
+  </table>
+</div>
+{% endif %} 
+<a href="/register/login/count/finish" role="button">FINISH!!</a>
+{% endblock %}

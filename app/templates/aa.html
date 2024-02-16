@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<p>緯度：<span>{{ lat }}</span><span>度</span></p>
+<p>経度：<span>{{ lon }}</span><span>度</span></p>
+
+<p>すべての情報</p>
+{% for location in Locations %}
+<li>緯度:{{location.lat}}, 経度:{{ location.lon }}</li>
+<tr>
+    <td>{{ location.create_at.strftime('%H:%M:%S') }}</td>
+    <td></td>
+    <td>{{ loop.index }}回目</td>
+    <td>{{ location.impression }}</td>
+</tr>
+{% endfor %}
+ <a href="/register" role="button">戻る</a>
+{% endblock %}
